@@ -120,7 +120,7 @@ const Footer = () => {
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Aadithya Lyvin Health Hub. All rights reserved.</p>
           <p style={{ marginTop: '0.5rem' }}>
-            Designed & Developed by <a href="http://infynixsolutions.ae" target="_blank" rel="noreferrer" style={{ color: 'var(--color-teal)', textDecoration: 'none', fontWeight: '500' }}>Infynix Solutions</a>
+            Designed & Developed by <a href="https://www.infynix-solutions.com/" target="_blank" rel="noreferrer" style={{ color: 'var(--color-teal)', textDecoration: 'none', fontWeight: '500' }}>Infynix Solutions</a>
           </p>
         </div>
       </div>
