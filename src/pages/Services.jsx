@@ -102,11 +102,10 @@ const Services = () => {
             <div 
               key={service.id}
               id={`service-details-${service.id}`}
-              className="about-highlight-section relative" 
+              className={`about-highlight-section relative ${index % 2 !== 0 ? 'reverse' : ''}`} 
               style={{ 
                 borderRadius: '30px', 
-                backgroundColor: '#f8fcfb',
-                flexDirection: index % 2 !== 0 ? 'row-reverse' : 'row'
+                backgroundColor: '#f8fcfb'
               }}
             >
               <div className="about-image-left">
@@ -144,30 +143,22 @@ const Services = () => {
         </div>
 
         {/* CTA Section (From Home Page) */}
-        <div className="banner-cta mt-12 mb-16" style={{ 
-          background: '#0D7C7C',
-          borderRadius: '24px', 
-          position: 'relative', 
-          padding: '3rem 4rem', 
-          display: 'flex', 
-          alignItems: 'center', 
-          minHeight: '300px' 
-        }}>
+        <div className="banner-cta mt-12 mb-16">
           {/* Overflow hidden wrapper just for background shapes */}
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', borderRadius: '24px', zIndex: 1 }}>
             <div style={{ position: 'absolute', bottom: '-40%', left: '5%', width: '80%', height: '60%', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }}></div>
             <div style={{ position: 'absolute', top: '0', right: '0', width: '25%', height: '100%', background: 'rgba(255,255,255,0.12)', borderTopLeftRadius: '80%' }}></div>
           </div>
 
-          <div style={{ maxWidth: '50%', zIndex: 2 }}>
+          <div className="banner-cta-text">
             <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '0.5rem' }}>Ready for a healthier smile?</span>
-            <h2 style={{ color: 'white', fontSize: '2rem', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>BOOK YOUR APPOINTMENT TODAY</h2>
+            <h2 style={{ color: 'white', fontSize: 'clamp(1.4rem, 5vw, 2rem)', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>BOOK YOUR APPOINTMENT TODAY</h2>
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', marginBottom: '2rem' }}>Our specialists will help you find the best care and treatment for your health needs.</p>
             <a href="/contact" style={{ display: 'inline-block', background: 'white', color: '#0D7C7C', padding: '0.600rem 1.35rem', borderRadius: '8px', fontWeight: '700', fontSize: '1rem', textDecoration: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>Visit site <ArrowRight size={16} style={{ display: 'inline', marginLeft: '5px', verticalAlign: 'text-bottom' }}/></a>
           </div>
           {/* Using the cut-out image placement style from the home page */}
-          <div style={{ position: 'absolute', right: '0', bottom: '0', width: '40%', height: '135%', zIndex: 2, pointerEvents: 'none' }}>
-             <img src="/assets/serviceban.png" alt="Clinic Interior" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom right' }} />
+          <div className="banner-cta-img-wrapper">
+             <img src="/assets/serviceban.png" alt="Clinic Interior" className="banner-cta-img" />
           </div>
         </div>
 

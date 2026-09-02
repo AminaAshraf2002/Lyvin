@@ -40,11 +40,11 @@ const Header = () => {
         </div>
         
         <nav className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`} style={{ gap: '3.5rem' }}>
-          <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')} end style={{ fontSize: '1rem' }} onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
-          <NavLink to="/services" className={({ isActive }) => (isActive ? 'active' : '')} style={{ fontSize: '1rem' }} onClick={() => setIsMobileMenuOpen(false)}>Services</NavLink>
-          <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')} style={{ fontSize: '1rem' }} onClick={() => setIsMobileMenuOpen(false)}>About Us</NavLink>
-          <NavLink to="/rmo" className={({ isActive }) => (isActive ? 'active' : '')} style={{ fontSize: '1rem' }} onClick={() => setIsMobileMenuOpen(false)}>Daytime RMO</NavLink>
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')} style={{ fontSize: '1rem' }} onClick={() => setIsMobileMenuOpen(false)}>Contact Us</NavLink>
+          <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')} end onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/services" className={({ isActive }) => (isActive ? 'active' : '')} onClick={() => setIsMobileMenuOpen(false)}>Services</NavLink>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')} onClick={() => setIsMobileMenuOpen(false)}>About Us</NavLink>
+          <NavLink to="/rmo" className={({ isActive }) => (isActive ? 'active' : '')} onClick={() => setIsMobileMenuOpen(false)}>Daytime RMO</NavLink>
+          <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')} onClick={() => setIsMobileMenuOpen(false)}>Contact Us</NavLink>
           <a href="tel:+91963322149" className="btn btn-gradient mobile-book-now" onClick={() => setIsMobileMenuOpen(false)}>
             Book Now
           </a>
@@ -55,11 +55,15 @@ const Header = () => {
             Book Now
           </a>
           <button 
-            className="mobile-menu-toggle"
+            className={`mobile-menu-toggle ${isMobileMenuOpen ? 'open' : ''}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <div className="hamburger-lines">
+               <span className="line line1"></span>
+               <span className="line line2"></span>
+               <span className="line line3"></span>
+            </div>
           </button>
         </div>
       </div>

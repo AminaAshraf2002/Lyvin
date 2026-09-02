@@ -48,8 +48,64 @@ const slides = [
 
 const tags = ["Expert Doctors", "Advanced Care", "24/7 Services", "Patient First"];
 
+const promoCardsData = [
+  <div className="promo-card" style={{ height: '100%' }}>
+    <div className="promo-card-content">
+      <h3>Health Checkup<br/>Packages</h3>
+      <div style={{ marginTop: '1rem', marginBottom: '1.5rem' }}>
+        <span style={{ color: '#F97316', fontSize: '0.8rem', fontWeight: '600', display: 'block' }}>Starting From</span>
+        <span style={{ color: '#F97316', fontSize: '2rem', fontWeight: '700' }}>$49</span>
+      </div>
+      <div style={{ marginTop: 'auto' }}>
+        <button className="promo-btn-outline">View Packages</button>
+      </div>
+    </div>
+    <img src="/assets/promo_family.png" alt="Family" className="promo-img-bottom-right" />
+  </div>,
+  <div className="promo-card" style={{ height: '100%' }}>
+    <div className="promo-card-content">
+      <h3>Why Choose Us?</h3>
+      <ul className="promo-list">
+        <li><CheckCircle2 size={16} className="promo-check" /> Experienced Doctors</li>
+        <li><CheckCircle2 size={16} className="promo-check" /> Modern Facilities</li>
+        <li><CheckCircle2 size={16} className="promo-check" /> Patient First Approach</li>
+        <li><CheckCircle2 size={16} className="promo-check" /> Affordable Pricing</li>
+      </ul>
+      <div style={{ marginTop: 'auto' }}>
+        <button className="promo-btn-outline">Learn More</button>
+      </div>
+    </div>
+  </div>,
+  <div className="promo-card" style={{ height: '100%' }}>
+    <div className="promo-card-content">
+      <h3>Take Care of<br/>Yourself Today</h3>
+      <p>Early diagnosis, better treatment, healthier life.</p>
+      <div style={{ marginTop: 'auto' }}>
+        <button className="promo-btn-solid">Book Now</button>
+      </div>
+    </div>
+    <img src="/assets/promo_woman.png" alt="Woman" className="promo-img-bottom-right" />
+  </div>,
+  <div className="promo-card" style={{ height: '100%' }}>
+    <div className="promo-card-content">
+      <h3>We're Here for You</h3>
+      <div style={{ margin: '0.5rem 0' }}>
+        <span style={{ color: '#F97316', fontSize: '2rem', fontWeight: '700' }}>24/7</span>
+      </div>
+      <p>Emergency Care<br/>You Can Trust.</p>
+      <div style={{ marginTop: 'auto' }}>
+        <button className="promo-btn-outline">Get Help Now</button>
+      </div>
+    </div>
+    <img src="/assets/promo_ambulance.png" alt="Ambulance" className="promo-img-bottom-right" />
+  </div>
+];
+
+const allPromoCards = [...promoCardsData, ...promoCardsData, ...promoCardsData, ...promoCardsData];
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentPromoSlide, setCurrentPromoSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
@@ -59,9 +115,18 @@ const Home = () => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
+
+    const promoTimer = setInterval(() => {
+      setCurrentPromoSlide((prev) => {
+        const isMob = window.innerWidth <= 768;
+        const maxSlide = allPromoCards.length - (isMob ? 1 : 3);
+        return prev >= maxSlide ? 0 : prev + 1;
+      });
+    }, 3500);
     
     return () => {
       clearInterval(timer);
+      clearInterval(promoTimer);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -151,7 +216,7 @@ const Home = () => {
       </section>
 
       {/* Trust Strip */}
-      <section className="trust-strip">
+      <section className="trust-strip" data-aos="fade-up">
         <div className="container">
           <div className="trust-content mx-auto">
             <img src="/assets/clinic_waiting_area_1786421958277.png" alt="Clinic Team and Waiting Area" />
@@ -163,16 +228,15 @@ const Home = () => {
 
 
       {/* Scaled Wrapper for remaining sections */}
-      <div style={{ zoom: 0.9 }}>
+      <div className="home-content-wrapper">
         {/* Services Preview Section */}
-        <section className="section bg-white" style={{ paddingTop: '4rem' }}>
+        <section className="section bg-white" style={{ paddingTop: '4rem' }} data-aos="fade-up">
         <div className="container">
-          <div className="section-header text-center" style={{ marginBottom: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', color: '#1E293B', marginBottom: '0.5rem', fontWeight: '700' }}>Our Services</h2>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-accent-start)' }}>
-              <div style={{ width: '30px', height: '2px', backgroundColor: 'var(--color-accent-start)' }}></div>
-              <Activity size={24} strokeWidth={2.5} />
-              <div style={{ width: '30px', height: '2px', backgroundColor: 'var(--color-accent-start)' }}></div>
+          <div className="text-center" style={{ marginBottom: '2rem' }}>
+            <span style={{ color: '#0D7C7C', fontWeight: '700', fontSize: '0.9rem', textTransform: 'uppercase' }}>Our Services</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontFamily: "'Outfit', sans-serif", color: '#1B3C59', fontWeight: '700', margin: 0, textAlign: 'center' }}>Comprehensive Care for You</h2>
+              <Activity size={32} color="#E2E8F0" strokeWidth={1.5} />
             </div>
           </div>
           <div className="services-replica-grid">
@@ -198,82 +262,36 @@ const Home = () => {
 
         {/* Bottom 4 Promo Cards */}
         <div className="container" style={{ maxWidth: '1450px', marginTop: '2.5rem' }}>
-          <div className="promo-cards-grid">
-            
-            {/* Card 1: Checkup Packages */}
-            <div className="promo-card">
-              <div className="promo-card-content">
-                <h3>Health Checkup<br/>Packages</h3>
-                <div style={{ marginTop: '1rem', marginBottom: '1.5rem' }}>
-                  <span style={{ color: '#F97316', fontSize: '0.8rem', fontWeight: '600', display: 'block' }}>Starting From</span>
-                  <span style={{ color: '#F97316', fontSize: '2rem', fontWeight: '700' }}>$49</span>
+          <div style={{ overflow: 'hidden', borderRadius: '8px' }}>
+            <div className="promo-cards-slider" style={{ 
+              display: 'flex', 
+              transition: currentPromoSlide === 0 ? 'none' : 'transform 0.5s ease', 
+              transform: isMobile ? `translateX(-${currentPromoSlide * 100}%)` : `translateX(-${currentPromoSlide * 33.333}%)`
+            }}>
+              
+              {allPromoCards.map((card, index) => (
+                <div key={index} style={{ flex: isMobile ? '0 0 100%' : '0 0 33.333%', padding: '0 0.75rem' }}>
+                  {card}
                 </div>
-                <div style={{ marginTop: 'auto' }}>
-                  <button className="promo-btn-outline">View Packages</button>
-                </div>
-              </div>
-              <img src="/assets/promo_family.png" alt="Family" className="promo-img-bottom-right" />
-            </div>
+              ))}
 
-            {/* Card 2: Why Choose Us */}
-            <div className="promo-card">
-              <div className="promo-card-content">
-                <h3>Why Choose Us?</h3>
-                <ul className="promo-list">
-                  <li><CheckCircle2 size={16} className="promo-check" /> Experienced Doctors</li>
-                  <li><CheckCircle2 size={16} className="promo-check" /> Modern Facilities</li>
-                  <li><CheckCircle2 size={16} className="promo-check" /> Patient First Approach</li>
-                  <li><CheckCircle2 size={16} className="promo-check" /> Affordable Pricing</li>
-                </ul>
-                <div style={{ marginTop: 'auto' }}>
-                  <button className="promo-btn-outline">Learn More</button>
-                </div>
-              </div>
             </div>
-
-            {/* Card 3: Take Care */}
-            <div className="promo-card">
-              <div className="promo-card-content">
-                <h3>Take Care of<br/>Yourself Today</h3>
-                <p>Early diagnosis, better treatment, healthier life.</p>
-                <div style={{ marginTop: 'auto' }}>
-                  <button className="promo-btn-solid">Book Now</button>
-                </div>
-              </div>
-              <img src="/assets/promo_woman.png" alt="Woman" className="promo-img-bottom-right" />
-            </div>
-
-            {/* Card 4: 24/7 Care */}
-            <div className="promo-card">
-              <div className="promo-card-content">
-                <h3>We're Here for You</h3>
-                <div style={{ margin: '0.5rem 0' }}>
-                  <span style={{ color: '#F97316', fontSize: '2rem', fontWeight: '700' }}>24/7</span>
-                </div>
-                <p>Emergency Care<br/>You Can Trust.</p>
-                <div style={{ marginTop: 'auto' }}>
-                  <button className="promo-btn-outline">Get Help Now</button>
-                </div>
-              </div>
-              <img src="/assets/promo_ambulance.png" alt="Ambulance" className="promo-img-bottom-right" />
-            </div>
-
           </div>
         </div>
       </section>
 
       {/* About Us Section (New Design) */}
-      <section className="section bg-white" style={{ paddingTop: '6rem', paddingBottom: '6rem', position: 'relative', overflow: 'hidden' }}>
+      <section className="section bg-white" style={{ paddingTop: 'clamp(3rem, 8vw, 6rem)', paddingBottom: 'clamp(3rem, 8vw, 6rem)', position: 'relative', overflow: 'hidden' }} data-aos="fade-up">
         {/* Light Blue Blob Background */}
         <div className="bg-light-blue-blob"></div>
         
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="about-prohealth-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+          <div className="about-prohealth-grid">
             
             {/* Left Side: Text */}
             <div className="about-prohealth-content">
               <span style={{ color: '#4A7CA6', fontWeight: '700', letterSpacing: '1px', fontSize: '0.85rem', textTransform: 'uppercase' }}>ABOUT US</span>
-              <h2 style={{ fontSize: '2.7rem', fontFamily: "'Outfit', sans-serif", color: '#1B3C59', marginTop: '0.5rem', marginBottom: '0.5rem', fontWeight: '700', lineHeight: '1.2' }}>
+              <h2 style={{ fontSize: 'clamp(2rem, 6vw, 2.7rem)', fontFamily: "'Outfit', sans-serif", color: '#1B3C59', marginTop: '0.5rem', marginBottom: '0.5rem', fontWeight: '600', lineHeight: '1.2' }}>
                 Lyvin is a team of <span style={{ color: 'var(--color-teal)' }}>experienced medical professionals</span>
               </h2>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-accent-start)', marginBottom: '1.5rem' }}>
@@ -298,46 +316,38 @@ const Home = () => {
 
 
       {/* Banner Section */}
-      <section className="section bg-white" style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
+      <section className="section bg-white" style={{ paddingTop: '2rem', paddingBottom: '4rem' }} data-aos="fade-up">
         <div className="container" style={{ maxWidth: '1450px' }}>
-          <div className="banner-cta" style={{ 
-            background: '#0D7C7C',
-            borderRadius: '24px', 
-            position: 'relative', 
-            padding: '3rem 4rem', 
-            display: 'flex', 
-            alignItems: 'center', 
-            minHeight: '300px' 
-          }}>
+          <div className="banner-cta home-banner-cta">
             {/* Overflow hidden wrapper just for background shapes */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', borderRadius: '24px', zIndex: 1 }}>
               <div style={{ position: 'absolute', bottom: '-40%', left: '5%', width: '80%', height: '60%', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }}></div>
               <div style={{ position: 'absolute', top: '0', right: '0', width: '25%', height: '100%', background: 'rgba(255,255,255,0.12)', borderTopLeftRadius: '80%' }}></div>
             </div>
 
-            <div style={{ maxWidth: '50%', zIndex: 2 }}>
-              <h2 style={{ color: 'white', fontSize: '2.5rem', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Take the First Step Towards Better Health</h2>
+            <div className="banner-cta-text">
+              <h2 style={{ color: 'white', fontSize: 'clamp(1.5rem, 4.8vw, 2.8rem)', fontWeight: '500', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Take the First Step Towards Better Health</h2>
               <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', marginBottom: '2rem' }}>Book an appointment now and connect with our expert doctors.</p>
               <button style={{ background: 'white', color: '#0D7C7C', padding: '0.875rem 1.75rem', borderRadius: '8px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>Book Appointment</button>
             </div>
             {/* Scaled up image to pop out of the top */}
-            <img src="/assets/bannercut.png" alt="Doctor" style={{ position: 'absolute', right: '15%', bottom: '0', height: '135%', objectFit: 'contain', zIndex: 2 }} />
+            <img src="/assets/bannercut.png" alt="Doctor" className="banner-cta-img" />
           </div>
         </div>
       </section>
 
       {/* How it Works Section */}
-      <section className="section bg-white" style={{ paddingTop: '4rem', paddingBottom: '6rem' }}>
+      <section className="section bg-white" style={{ paddingTop: '4rem', paddingBottom: '6rem' }} data-aos="fade-up">
         <div className="container">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
             <span style={{ color: '#0D7C7C', fontWeight: '700', fontSize: '0.9rem', textTransform: 'uppercase' }}>How It Works</span>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
-              <h2 style={{ fontSize: '2.5rem', fontFamily: "'Outfit', sans-serif", color: '#1B3C59', fontWeight: '700' }}>Simple Steps to Better Health</h2>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontFamily: "'Outfit', sans-serif", color: '#1B3C59', fontWeight: '700' }}>Simple Steps to Better Health</h2>
               <Activity size={32} color="#E2E8F0" strokeWidth={1.5} />
             </div>
           </div>
           
-          <div className="how-it-works-steps" style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="how-it-works-steps">
             {/* Smoother, Deeper Wavy Connecting Line */}
             <div style={{ position: 'absolute', top: '15px', left: '10%', right: '10%', height: '50px', zIndex: 1 }}>
               <svg viewBox="0 0 300 50" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
@@ -351,7 +361,17 @@ const Home = () => {
               { num: "03", title: "Consult Doctor", desc: "Meet with our experienced specialists.", icon: <Stethoscope size={24} color="#0D7C7C" /> },
               { num: "04", title: "Get Better", desc: "Follow advice and stay healthy.", icon: <Heart size={24} color="#0D7C7C" /> }
             ].map((step, i) => (
-              <div key={i} style={{ textAlign: 'center', position: 'relative', zIndex: 2, width: '220px' }}>
+              <div key={i} className="how-it-works-step">
+                
+                {/* Mobile-only connecting lines for each row */}
+                {(i === 0 || i === 2) && (
+                  <div className="mobile-wavy-line" style={{ position: 'absolute', top: '15px', left: '50%', width: 'calc(100% + 1.5rem)', height: '50px', zIndex: -1 }}>
+                    <svg viewBox="0 0 100 50" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                      <path d="M 0,25 Q 50,-10 100,25" fill="none" stroke="#CBD5E1" strokeWidth="2" strokeDasharray="6, 6" />
+                    </svg>
+                  </div>
+                )}
+
                 <div style={{ width: '80px', height: '80px', background: '#F0FDF4', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', boxShadow: '0 0 0 10px white' }}>
                   {step.icon}
                 </div>
@@ -369,16 +389,16 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us Redesign */}
-      <section className="section bg-white" style={{ paddingBottom: '4rem' }}>
+      <section className="section bg-white" style={{ paddingBottom: '4rem' }} data-aos="fade-up">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
+          <div className="why-choose-us-grid">
             
             {/* Left Image Block */}
-            <div style={{ position: 'relative', paddingLeft: '2rem' }}>
+            <div className="why-choose-left-block" style={{ position: 'relative' }}>
               {/* Teal accent block behind the image */}
-              <div style={{ position: 'absolute', top: '-1rem', bottom: '-1rem', left: '0', width: '150px', background: '#0D7C7C', borderRadius: '24px', zIndex: 1 }}></div>
+              <div className="why-choose-accent" style={{ position: 'absolute', background: '#0D7C7C', borderRadius: '24px', zIndex: 1 }}></div>
               
-              <div style={{ position: 'relative', zIndex: 2, borderRadius: '24px', overflow: 'hidden', height: '500px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+              <div className="why-choose-img-container" style={{ position: 'relative', zIndex: 2, borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
                 <img src="/assets/nurse_assisting_1786422015946.png" alt="Medical staff" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 
                 {/* Wavy thin lines overlay at the bottom */}
@@ -393,7 +413,7 @@ const Home = () => {
             
             {/* Right Text Block */}
             <div>
-              <h2 style={{ fontSize: '2.5rem', fontFamily: "'Outfit', sans-serif", fontWeight: '700', marginBottom: '2rem', lineHeight: '1.2' }}>
+              <h2 style={{ fontSize: 'clamp(2rem, 6vw, 2.5rem)', fontFamily: "'Outfit', sans-serif", fontWeight: '700', marginBottom: '2rem', lineHeight: '1.2' }}>
                 <span style={{ color: '#0D7C7C' }}>Why Choose Us?</span> <br/>
                 <span style={{ color: '#1E293B' }}>Your Health, Our Priority</span>
               </h2>
@@ -429,13 +449,12 @@ const Home = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="section bg-white" style={{ paddingBottom: '4rem' }}>
+      <section className="section bg-white" style={{ paddingBottom: '4rem' }} data-aos="fade-up">
         <div className="container" style={{ maxWidth: '1450px' }}>
           <div className="banner-cta" style={{ 
             background: '#F1F5F9',
-            borderRadius: '24px', 
             position: 'relative', 
-            padding: '5rem 2rem', 
+            padding: 'clamp(3rem, 8vw, 5rem) 2rem', 
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
@@ -444,16 +463,16 @@ const Home = () => {
             border: '1px solid rgba(13,124,124,0.15)'
           }}>
             {/* Overflow hidden wrapper just for background shapes */}
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', borderRadius: '24px', zIndex: 1 }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', borderRadius: 'inherit', zIndex: 1 }}>
               <div style={{ position: 'absolute', bottom: '-40%', left: '5%', width: '80%', height: '60%', background: 'rgba(13,124,124,0.08)', borderRadius: '50%' }}></div>
               <div style={{ position: 'absolute', top: '0', right: '0', width: '25%', height: '100%', background: 'rgba(13,124,124,0.15)', borderTopLeftRadius: '80%' }}></div>
             </div>
             
             <div style={{ position: 'relative', zIndex: 2 }}>
-              <h2 style={{ color: '#0D7C7C', fontSize: '3rem', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Ready to prioritize your health?</h2>
-              <p style={{ color: '#475569', fontSize: '1.15rem', marginBottom: '2.5rem', fontWeight: '500', maxWidth: '600px', margin: '0 auto 2.5rem auto' }}>Walk in today or book an appointment to skip the queue. Our team is ready to provide you with the best care.</p>
-              <a href="tel:+91963322149" style={{ background: '#0D7C7C', color: 'white', padding: '1rem 2.5rem', borderRadius: '8px', fontWeight: '700', fontSize: '1.1rem', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(13,124,124,0.3)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                <Calendar size={20} /> Book Your Appointment Now
+              <h2 style={{ color: '#0D7C7C', fontSize: 'clamp(2rem, 6vw, 3rem)', fontWeight: '600', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Ready to prioritize your health?</h2>
+              <p style={{ color: '#475569', fontSize: 'clamp(1rem, 4vw, 1.15rem)', marginBottom: '2.5rem', fontWeight: '500', maxWidth: '600px', margin: '0 auto 2.5rem auto' }}>Walk in today or book an appointment to skip the queue. Our team is ready to provide you with the best care.</p>
+              <a href="tel:+91963322149" style={{ background: '#0D7C7C', color: 'white', padding: 'clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 5vw, 2.5rem)', borderRadius: '8px', fontWeight: '700', fontSize: 'clamp(0.9rem, 3vw, 1.1rem)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(13,124,124,0.3)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Calendar size={18} /> Book Your Appointment Now
               </a>
             </div>
           </div>

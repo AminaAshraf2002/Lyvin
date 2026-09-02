@@ -19,7 +19,16 @@ function ScrollToTop() {
   return null;
 }
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <Router>
       <ScrollToTop />

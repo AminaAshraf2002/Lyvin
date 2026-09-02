@@ -165,12 +165,12 @@ const DaytimeRMO = () => {
           <div className="text-center" style={{ marginBottom: '4rem' }}>
             <span style={{ color: '#0D7C7C', fontWeight: '700', fontSize: '0.9rem', textTransform: 'uppercase' }}>How It Works</span>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
-              <h2 style={{ fontSize: '2.5rem', fontFamily: "'Inter', sans-serif", color: '#1B3C59', fontWeight: '700' }}>Simple Steps to Get Care</h2>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontFamily: "'Inter', sans-serif", color: '#1B3C59', fontWeight: '700' }}>Simple Steps to Get Care</h2>
               <Activity size={32} color="#E2E8F0" strokeWidth={1.5} />
             </div>
           </div>
           
-          <div className="how-it-works-steps" style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="how-it-works-steps">
             {/* Smoother, Deeper Wavy Connecting Line */}
             <div style={{ position: 'absolute', top: '15px', left: '10%', right: '10%', height: '50px', zIndex: 1 }}>
               <svg viewBox="0 0 300 50" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
@@ -184,7 +184,17 @@ const DaytimeRMO = () => {
               { num: "03", title: "Procedure", desc: "Expert minor procedures performed safely.", icon: <UserPlus size={24} color="#0D7C7C" /> },
               { num: "04", title: "Recovery", desc: "Rest assured you are in good hands.", icon: <Activity size={24} color="#0D7C7C" /> }
             ].map((step, i) => (
-              <div key={i} style={{ textAlign: 'center', position: 'relative', zIndex: 2, width: '220px' }}>
+              <div key={i} className="how-it-works-step">
+                
+                {/* Mobile-only connecting lines for each row */}
+                {(i === 0 || i === 2) && (
+                  <div className="mobile-wavy-line" style={{ position: 'absolute', top: '15px', left: '50%', width: 'calc(100% + 1.5rem)', height: '50px', zIndex: -1 }}>
+                    <svg viewBox="0 0 100 50" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                      <path d="M 0,25 Q 50,-10 100,25" fill="none" stroke="#CBD5E1" strokeWidth="2" strokeDasharray="6, 6" />
+                    </svg>
+                  </div>
+                )}
+
                 <div style={{ width: '80px', height: '80px', background: '#F0FDF4', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', boxShadow: '0 0 0 10px white' }}>
                   {step.icon}
                 </div>
@@ -198,23 +208,15 @@ const DaytimeRMO = () => {
       </section>
 
       {/* 5. CTA Banner */}
-      <div className="cta-banner-container" style={{ maxWidth: '1450px', margin: '0 auto', marginBottom: '8rem', padding: '0 2rem' }}>
-        <div className="banner-cta" style={{ 
-          background: '#0D7C7C',
-          borderRadius: '24px', 
-          position: 'relative', 
-          padding: '3rem 4rem', 
-          display: 'flex', 
-          alignItems: 'center', 
-          minHeight: '300px' 
-        }}>
+      <div className="cta-banner-container">
+        <div className="banner-cta">
           {/* Overflow hidden wrapper just for background shapes */}
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', borderRadius: '24px', zIndex: 1 }}>
             <div style={{ position: 'absolute', bottom: '-40%', left: '5%', width: '80%', height: '60%', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }}></div>
             <div style={{ position: 'absolute', top: '0', right: '0', width: '25%', height: '100%', background: 'rgba(255,255,255,0.12)', borderTopLeftRadius: '80%' }}></div>
           </div>
 
-          <div style={{ maxWidth: '50%', zIndex: 2 }}>
+          <div className="banner-cta-text">
             <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '0.5rem' }}>IMMEDIATE ASSISTANCE</span>
             <h2 style={{ color: 'white', fontSize: '2rem', fontFamily: "'Inter', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Need Immediate Medical Care?</h2>
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', marginBottom: '2rem' }}>Our Daytime RMO is available for walk-ins and urgent consultations.</p>
@@ -224,8 +226,8 @@ const DaytimeRMO = () => {
           </div>
           
           {/* Cut-out image placement */}
-          <div style={{ position: 'absolute', right: '0', bottom: '0', width: '45%', height: '180%', zIndex: 2, pointerEvents: 'none' }}>
-             <img src="/assets/rmo1.png" alt="Medical Care" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom right' }} />
+          <div className="banner-cta-img-wrapper">
+             <img src="/assets/rmo1.png" alt="Medical Care" className="banner-cta-img" />
           </div>
         </div>
       </div>

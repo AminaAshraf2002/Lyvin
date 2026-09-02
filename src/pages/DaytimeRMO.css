@@ -336,9 +336,28 @@
   }
   .rmo-hero-new {
     flex-direction: column-reverse;
+    min-height: auto;
+    padding: 1rem 0 0 0;
   }
   .rmo-hero-text {
     max-width: 100%;
-    padding: 2rem;
+    padding: 0.5rem 1.5rem 1rem 1.5rem;
+  }
+  .rmo-hero-title {
+    margin-top: 1.5rem;
+  }
+  .rmo-hero-buttons a,
+  .rmo-hero-buttons button {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+  .rmo-hero-buttons {
+    margin-bottom: 2rem;
+  }
+  .rmo-services-header h2 {
+    font-size: 1.6rem;
+  }
+  .rmo-about-image {
+    height: 250px;
   }
 }
