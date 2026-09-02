@@ -269,7 +269,7 @@ const About = () => {
             <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '0.5rem' }}>TAKE ACTION TODAY</span>
             <h2 style={{ color: 'white', fontSize: '2rem', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Ready to Take the First Step?</h2>
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', marginBottom: '2rem' }}>Book your appointment today and enjoy a healthier, brighter smile!</p>
-            <button style={{ background: 'white', color: '#0D7C7C', padding: '0.75rem 1.75rem', borderRadius: '8px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button onClick={() => window.location.href='tel:+91963322149'} style={{ background: 'white', color: '#0D7C7C', padding: '0.75rem 1.75rem', borderRadius: '8px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               Book Appointment <ArrowUpRight size={20} />
             </button>
           </div>

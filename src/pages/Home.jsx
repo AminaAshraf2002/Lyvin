@@ -81,7 +81,7 @@ const promoCardsData = [
       <h3>Take Care of<br/>Yourself Today</h3>
       <p>Early diagnosis, better treatment, healthier life.</p>
       <div style={{ marginTop: 'auto' }}>
-        <button className="promo-btn-solid">Book Now</button>
+        <button onClick={() => window.location.href='tel:+91963322149'} className="promo-btn-solid">Book Now</button>
       </div>
     </div>
     <img src="/assets/promo_woman.png" alt="Woman" className="promo-img-bottom-right" />
@@ -328,7 +328,7 @@ const Home = () => {
             <div className="banner-cta-text">
               <h2 style={{ color: 'white', fontSize: 'clamp(1.5rem, 4.8vw, 2.8rem)', fontWeight: '500', fontFamily: "'Outfit', sans-serif", marginBottom: '1rem', lineHeight: '1.2' }}>Take the First Step Towards Better Health</h2>
               <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', marginBottom: '2rem' }}>Book an appointment now and connect with our expert doctors.</p>
-              <button style={{ background: 'white', color: '#0D7C7C', padding: '0.875rem 1.75rem', borderRadius: '8px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>Book Appointment</button>
+              <button onClick={() => window.location.href='tel:+91963322149'} style={{ background: 'white', color: '#0D7C7C', padding: '0.875rem 1.75rem', borderRadius: '8px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>Book Appointment</button>
             </div>
             {/* Scaled up image to pop out of the top */}
             <img src="/assets/bannercut.png" alt="Doctor" className="banner-cta-img" />
